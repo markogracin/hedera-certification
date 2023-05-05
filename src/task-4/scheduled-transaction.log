@@ -1,3 +1,54 @@
-The schedule ID is 0.0.4569071
-The scheduled transaction ID is 0.0.4567577@1683280729.863946132?scheduled
+The schedule ID is 0.0.4569675
+The scheduled transaction ID is 0.0.4567577@1683283431.423882117?scheduled
 The transaction consensus status is 22
+/Users/mgracin/Projects/barrage/hedera/cert/node_modules/@hashgraph/sdk/lib/ReceiptStatusError.cjs:43
+    super(props, `receipt for transaction ${props.transactionId.toString()} contained error status ${props.status.toString()}`);
+    ^
+
+ReceiptStatusError: receipt for transaction 0.0.4567577@1683283433.110568598 contained error status SCHEDULE_ALREADY_DELETED
+    at new ReceiptStatusError (/Users/mgracin/Projects/barrage/hedera/cert/node_modules/@hashgraph/sdk/lib/ReceiptStatusError.cjs:43:5)
+    at TransactionReceiptQuery._mapStatusError (/Users/mgracin/Projects/barrage/hedera/cert/node_modules/@hashgraph/sdk/lib/transaction/TransactionReceiptQuery.cjs:273:12)
+    at TransactionReceiptQuery.execute (/Users/mgracin/Projects/barrage/hedera/cert/node_modules/@hashgraph/sdk/lib/Executable.cjs:644:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async TransactionResponse.getReceipt (/Users/mgracin/Projects/barrage/hedera/cert/node_modules/@hashgraph/sdk/lib/transaction/TransactionResponse.cjs:88:21)
+    at async main (/Users/mgracin/Projects/barrage/hedera/cert/src/task-4/scheduled-transaction.js:71:19) {
+  status: Status { _code: 212 },
+  transactionId: TransactionId {
+    accountId: AccountId {
+      shard: Long { low: 0, high: 0, unsigned: false },
+      realm: Long { low: 0, high: 0, unsigned: false },
+      num: Long { low: 4567577, high: 0, unsigned: false },
+      aliasKey: null,
+      evmAddress: null,
+      _checksum: null
+    },
+    validStart: Timestamp {
+      seconds: Long { low: 1683283433, high: 0, unsigned: false },
+      nanos: Long { low: 110568598, high: 0, unsigned: false }
+    },
+    scheduled: false,
+    nonce: null
+  },
+  transactionReceipt: TransactionReceipt {
+    status: Status { _code: 212 },
+    accountId: null,
+    fileId: null,
+    contractId: null,
+    topicId: null,
+    tokenId: null,
+    scheduleId: null,
+    exchangeRate: ExchangeRate {
+      hbars: 30000,
+      cents: 173376,
+      expirationTime: 2023-05-05T11:00:00.000Z,
+      exchangeRateInCents: 5.7792
+    },
+    topicSequenceNumber: Long { low: 0, high: 0, unsigned: false },
+    topicRunningHash: Uint8Array(0) [],
+    totalSupply: Long { low: 0, high: 0, unsigned: false },
+    scheduledTransactionId: null,
+    serials: [],
+    duplicates: [],
+    children: []
+  }
+}

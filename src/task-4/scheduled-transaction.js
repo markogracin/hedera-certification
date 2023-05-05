@@ -3,17 +3,18 @@ const {
 	Client,
 	ScheduleCreateTransaction,
 	ScheduleDeleteTransaction,
+	ScheduleSignTransaction,
 	PrivateKey,
 	Hbar
 } = require("@hashgraph/sdk");
+require("dotenv").config();
 
-require('dotenv').config()
+const myAccountId = process.env.MY_ACCOUNT_ID
+const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY)
 
-const myPrivateKey = PrivateKey.fromString(process.env.MY_PRIVATE_KEY);
-const myAccountId = process.env.MY_ACCOUNT_ID;
-
-const accountId1 = process.env.ACCOUNT_ID_1;
-const accountId2 = process.env.ACCOUNT_ID_2;
+const acc1_id = process.env.ACCOUNT_ID_1
+const acc1 = PrivateKey.fromString(process.env.PRIVATE_KEY_1)
+const acc2_id = process.env.ACCOUNT_ID_2
 
 const client = Client.forTestnet();
 
@@ -23,12 +24,13 @@ async function main() {
 
 	//Create a transaction to schedule
 	const transferTransaction = new TransferTransaction()
-		.addHbarTransfer(accountId1, Hbar.fromTinybars(-101))
-		.addHbarTransfer(accountId2, Hbar.fromTinybars(101));
+		.addHbarTransfer(acc1_id, Hbar.fromTinybars(-100))
+		.addHbarTransfer(acc2_id, Hbar.fromTinybars(100));
 
 	//Schedule a transaction
 	const scheduleTransaction = await new ScheduleCreateTransaction()
 		.setScheduledTransaction(transferTransaction)
+		.setScheduleMemo("Scheduled Transaction Cert!!")
 		.setAdminKey(myPrivateKey)
 		.execute(client);
 
@@ -58,6 +60,19 @@ async function main() {
 	//Get the transaction status
 	const transactionStatus = receipt.status;
 	console.log("The transaction consensus status is " +transactionStatus);
+
+	//Try to execute the deleted scheduled tx
+	const scheduledSignTransaction = await new ScheduleSignTransaction()
+		.setScheduleId(scheduleId)
+		.freezeWith(client)
+		.sign(acc1);
+
+	const txResponse1 = await scheduledSignTransaction.execute(client);
+	const receipt1 = await txResponse1.getReceipt(client);
+
+	//Get the transaction status - should fail
+	const transactionStatus1 = receipt1.status;
+	console.log("The transaction consensus status is " + transactionStatus1);
 
 	process.exit();
 }

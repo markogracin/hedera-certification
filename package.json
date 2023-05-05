@@ -8,7 +8,8 @@
     "task:token-service": "node src/task-2/token-service.js",
     "task:smart-contract-service": "node src/task-3/smart-contract-service.js",
     "task:scheduled-transaction": "node src/task-4/scheduled-transaction.js",
-    "task:multi-signature": "node src/task-5/multi-signature.js"
+    "task:multi-signature": "node src/task-5/multi-signature.js",
+    "task:consensus-service": "node src/task-6/consensus-service.js"
   },
   "author": "Marko Gracin",
   "license": "ISC",
