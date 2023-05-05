@@ -1,0 +1,19 @@
+{
+  "name": "hedera-certification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "task:setup": "node src/task-1/setup.js",
+    "task:token-service": "node src/task-2/token-service.js",
+    "task:smart-contract-service": "node src/task-3/smart-contract-service.js",
+    "task:scheduled-transaction": "node src/task-4/scheduled-transaction.js",
+    "task:multi-signature": "node src/task-5/multi-signature.js"
+  },
+  "author": "Marko Gracin",
+  "license": "ISC",
+  "dependencies": {
+    "@hashgraph/sdk": "^2.24.2",
+    "dotenv": "^16.0.3"
+  }
+}
